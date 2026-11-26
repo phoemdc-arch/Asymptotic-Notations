@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asymptotic Notations — Big O, Big Omega & Big Theta</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Top Header -->
+    <header class="card header-card">
+      <div class="header-top">
+        <div>
+          <span class="badge">Algorithm Analysis Activity</span>
+          <h1>Asymptotic Notations Laboratory</h1>
+          <p class="subtitle">
+            Exploring <strong>Big O ($O$)</strong>, <strong>Big Omega ($\Omega$)</strong>, and
+            <strong>Big Theta ($\Theta$)</strong> through interactive simulations and Java programs.
+          </p>
+        </div>
+        <button class="btn btn-primary no-print" onclick="window.print()">Print / Save PDF</button>
+      </div>
+
+      <!-- Editable Student Info -->
+      <div class="student-grid">
+        <div class="input-group">
+          <label for="studentName">Student Name</label>
+          <input type="text" id="studentName" placeholder="Enter your full name" />
+        </div>
+        <div class="input-group">
+          <label for="courseSection">Course &amp; Section</label>
+          <input type="text" id="courseSection" placeholder="e.g., BSCS 2-A" />
+        </div>
+        <div class="input-group">
+          <label for="submissionDate">Date</label>
+          <input type="text" id="submissionDate" placeholder="e.g., November 26, 2026" />
+        </div>
+      </div>
+    </header>
+
+    <!-- PART 1: BIG O -->
+    <section class="card">
+      <div class="section-header header-violet">
+        <h2>Part 1. Big O – Upper Bound ($O(n)$)</h2>
+        <span class="pill">Worst-Case Linear Search</span>
+      </div>
+
+      <div class="section-body">
+        <div class="simulator-box">
+          <div class="sim-controls">
+            <label for="bigOTarget">Search Target:</label>
+            <input type="number" id="bigOTarget" value="99" />
+            <button class="btn btn-violet" onclick="runBigO()">Run Search</button>
+            <button class="btn btn-outline" onclick="addElement('bigO')">+ Add Element (n+1)</button>
+            <button class="btn btn-outline" onclick="resetArray('bigO')">Reset (n=10)</button>
+          </div>
+          <div id="bigOArray" class="array-row"></div>
+          <p id="bigOStatus" class="status-text">Array size n = 10. Enter a number and click Run Search.</p>
+        </div>
+
+        <div class="code-header">
+          <span>BigOUpperBound.java</span>
+          <button class="btn btn-small" onclick="copyCode('javaBigO')">Copy Code</button>
+        </div>
+        <pre><code id="javaBigO">import java.util.Scanner;
+
+public class BigOUpperBound {
+    public static void main(String[] args) {
+        int[] numbers = {12, 25, 37, 44, 51, 63, 78, 82, 90, 99};
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number to search for: ");
+        int target = scanner.nextInt();
+
+        int operations = 0;
+        boolean found = false;
+
+        for (int i = 0; i < numbers.length; i++) {
+            operations++;
+            if (numbers[i] == target) {
+                found = true;
+                System.out.println("Number " + target + " found at index " + i + ".");
+                break;
+            }
+        }
+
+        if (!found) {
+            System.out.println("Number " + target + " was NOT found in the array.");
+        }
+        System.out.println("Array size (n): " + numbers.length);
+        System.out.println("Operations performed: " + operations);
+        scanner.close();
+    }
+}</code></pre>
+
+        <div class="guide-box">
+          <h3>Guide Question: What happens to the number of operations when the array size increases?</h3>
+          <p>
+            In the worst-case scenario (when the target number is at the very end of the array or not present at all),
+            the number of operations increases <strong>linearly ($O(n)$)</strong> in direct proportion to the array size $n$.
+            Doubling the number of elements doubles the maximum comparisons required.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 2: BIG OMEGA -->
+    <section class="card">
+      <div class="section-header header-fuchsia">
+        <h2>Part 2. Big Omega – Lower Bound ($\Omega(1)$)</h2>
+        <span class="pill">Best-Case First-Element Search</span>
+      </div>
+
+      <div class="section-body">
+        <div class="simulator-box">
+          <div class="sim-controls">
+            <button class="btn btn-fuchsia" onclick="runBigOmega()">Search First Element</button>
+            <button class="btn btn-outline" onclick="addElement('bigOmega')">+ Add Element (n+1)</button>
+            <button class="btn btn-outline" onclick="resetArray('bigOmega')">Reset (n=10)</button>
+          </div>
+          <div id="bigOmegaArray" class="array-row"></div>
+          <p id="bigOmegaStatus" class="status-text">Array size n = 10. Target is fixed to index 0.</p>
+        </div>
+
+        <div class="code-header">
+          <span>BigOmegaLowerBound.java</span>
+          <button class="btn btn-small" onclick="copyCode('javaBigOmega')">Copy Code</button>
+        </div>
+        <pre><code id="javaBigOmega">public class BigOmegaLowerBound {
+    public static void main(String[] args) {
+        int[] numbers = {15, 28, 34, 49, 53, 67, 71, 86, 92, 100};
+
+        // Set the first element as the number to search for (Best Case)
+        int target = numbers[0];
+        int operations = 0;
+
+        for (int i = 0; i < numbers.length; i++) {
+            operations++;
+            if (numbers[i] == target) {
+                System.out.println("Best-case match! Found " + target + " at index " + i + ".");
+                break;
+            }
+        }
+
+        System.out.println("Array size (n): " + numbers.length);
+        System.out.println("Operations performed: " + operations);
+    }
+}</code></pre>
+
+        <div class="guide-box">
+          <h3>Guide Question: Why does the program perform fewer operations when the number is found immediately?</h3>
+          <p>
+            Because the target value is located at index <code>0</code>, the <code>if</code> condition evaluates to
+            <code>true</code> on the very first iteration and executes <code>break</code>. The loop terminates immediately
+            after <strong>1 operation ($\Omega(1)$)</strong>, meaning execution time remains constant regardless of how large the array grows.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PART 3: BIG THETA -->
+    <section class="card">
+      <div class="section-header header-indigo">
+        <h2>Part 3. Big Theta – Tight Bound ($\Theta(n)$)</h2>
+        <span class="pill">Complete Array Summation</span>
+      </div>
+
+      <div class="section-body">
+        <div class="simulator-box">
+          <div class="sim-controls">
+            <button class="btn btn-indigo" onclick="runBigTheta()">Calculate Total Sum</button>
+            <button class="btn btn-outline" onclick="addElement('bigTheta')">+ Add Element (n+1)</button>
+            <button class="btn btn-outline" onclick="resetArray('bigTheta')">Reset (n=10)</button>
+          </div>
+          <div id="bigThetaArray" class="array-row"></div>
+          <p id="bigThetaStatus" class="status-text">Array size n = 10. Click Calculate Total Sum.</p>
+        </div>
+
+        <div class="code-header">
+          <span>BigThetaTightBound.java</span>
+          <button class="btn btn-small" onclick="copyCode('javaBigTheta')">Copy Code</button>
+        </div>
+        <pre><code id="javaBigTheta">public class BigThetaTightBound {
+    public static void main(String[] args) {
+        int[] numbers = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+
+        int sum = 0;
+        int operations = 0;
+
+        for (int i = 0; i < numbers.length; i++) {
+            sum += numbers[i];
+            operations++;
+        }
+
+        System.out.println("Total sum: " + sum);
+        System.out.println("Array size (n): " + numbers.length);
+        System.out.println("Operations performed: " + operations);
+    }
+}</code></pre>
+
+        <div class="guide-box">
+          <h3>Guide Question: What happens to the number of operations when you increase the array size?</h3>
+          <p>
+            To compute the total sum, every single element must be visited with no early exit. Therefore, the best-case and
+            worst-case operation counts are identical and always equal $n$. Increasing the array size increases the
+            operations strictly at a <strong>1-to-1 linear rate ($\Theta(n)$)</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Summary Table -->
+    <section class="card">
+      <div class="section-header header-dark">
+        <h2>Summary Comparison</h2>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Notation</th>
+              <th>Bound Type</th>
+              <th>Algorithm / Scenario</th>
+              <th>Operations ($n=10$)</th>
+              <th>Growth Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Big O ($O(n)$)</strong></td>
+              <td>Upper Bound (Worst Case)</td>
+              <td>Linear Search (Last / Missing)</td>
+              <td>10 operations</td>
+              <td>Linear</td>
+            </tr>
+            <tr>
+              <td><strong>Big Omega ($\Omega(1)$)</strong></td>
+              <td>Lower Bound (Best Case)</td>
+              <td>Linear Search (First Element)</td>
+              <td>1 operation</td>
+              <td>Constant</td>
+            </tr>
+            <tr>
+              <td><strong>Big Theta ($\Theta(n)$)</strong></td>
+              <td>Tight Bound (Exact)</td>
+              <td>Sum of All Elements</td>
+              <td>10 operations</td>
+              <td>Linear</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- Interactive Visualizer Script -->
+  <script>
+    const defaultData = {
+      bigO: [12, 25, 37, 44, 51, 63, 78, 82, 90, 99],
+      bigOmega: [15, 28, 34, 49, 53, 67, 71, 86, 92, 100],
+      bigTheta: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    };
+
+    const arrays = {
+      bigO: [...defaultData.bigO],
+      bigOmega: [...defaultData.bigOmega],
+      bigTheta: [...defaultData.bigTheta]
+    };
+
+    function renderArray(key, activeIdx = -1, foundIdx = -1) {
+      const container = document.getElementById(`${key}Array`);
+      container.innerHTML = "";
+      arrays[key].forEach((val, idx) => {
+        const cell = document.createElement("div");
+        cell.className = "array-cell";
+        if (idx === foundIdx) cell.classList.add("cell-found");
+        else if (idx <= activeIdx) cell.classList.add("cell-visited");
+        cell.innerHTML = `<span class="idx">[${idx}]</span><strong>${val}</strong>`;
+        container.appendChild(cell);
+      });
+    }
+
+    function addElement(key) {
+      const nextVal = arrays[key][arrays[key].length - 1] + 10;
+      arrays[key].push(nextVal);
+      renderArray(key);
+      document.getElementById(`${key}Status`).textContent =
+        `Added element ${nextVal}. New array size n = ${arrays[key].length}.`;
+    }
+
+    function resetArray(key) {
+      arrays[key] = [...defaultData[key]];
+      renderArray(key);
+      document.getElementById(`${key}Status`).textContent =
+        `Reset to default array size n = ${arrays[key].length}.`;
+    }
+
+    async function runBigO() {
+      const target = Number(document.getElementById("bigOTarget").value);
+      const arr = arrays.bigO;
+      let ops = 0;
+      for (let i = 0; i < arr.length; i++) {
+        ops++;
+        renderArray("bigO", i);
+        await new Promise(r => setTimeout(r, 140));
+        if (arr[i] === target) {
+          renderArray("bigO", i, i);
+          document.getElementById("bigOStatus").textContent =
+            `Found ${target} at index ${i} after ${ops} operation(s) (n = ${arr.length}).`;
+          return;
+        }
+      }
+      document.getElementById("bigOStatus").textContent =
+        `Worst Case! ${target} NOT found after ${ops} operations (n = ${arr.length}).`;
+    }
+
+    function runBigOmega() {
+      const arr = arrays.bigOmega;
+      const target = arr[0];
+      renderArray("bigOmega", 0, 0);
+      document.getElementById("bigOmegaStatus").textContent =
+        `Best Case! Found ${target} at index 0 in 1 operation regardless of n = ${arr.length}.`;
+    }
+
+    async function runBigTheta() {
+      const arr = arrays.bigTheta;
+      let sum = 0;
+      let ops = 0;
+      for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+        ops++;
+        renderArray("bigTheta", i, i);
+        await new Promise(r => setTimeout(r, 120));
+      }
+      document.getElementById("bigThetaStatus").textContent =
+        `Total Sum = ${sum} | Operations = ${ops} (Always equals n = ${arr.length}).`;
+    }
+
+    function copyCode(elementId) {
+      const text = document.getElementById(elementId).innerText;
+      navigator.clipboard.writeText(text);
+      alert("Java code copied to clipboard!");
+    }
+
+    renderArray("bigO");
+    renderArray("bigOmega");
+    renderArray("bigTheta");
+  </script>
+</body>
+</html>

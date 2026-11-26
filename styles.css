@@ -1,0 +1,366 @@
+/* Dark Obsidian & Purple Theme */
+:root {
+  --bg-black: #09090b;
+  --bg-card: #12101a;
+  --bg-elevated: #1a1626;
+  --border-purple: #2e2447;
+  --text-main: #f3e8ff;
+  --text-muted: #b8a8d9;
+  --purple-primary: #9333ea;
+  --violet-accent: #7c3aed;
+  --fuchsia-accent: #c026d3;
+  --indigo-accent: #4f46e5;
+  --emerald-found: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-black);
+  color: var(--text-main);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* Cards */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-purple);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(88, 28, 135, 0.18);
+}
+
+.header-card {
+  padding: 1.75rem;
+  border-top: 4px solid var(--purple-primary);
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(147, 51, 234, 0.2);
+  color: #d8b4fe;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.6rem;
+}
+
+h1 {
+  font-size: 1.85rem;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+}
+
+/* Student Info Grid */
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-purple);
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+}
+
+.input-group input,
+.sim-controls input {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-purple);
+  color: #ffffff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+}
+
+.sim-controls input {
+  width: 90px;
+}
+
+/* Section Headers */
+.section-header {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.header-violet {
+  background: linear-gradient(90deg, #4c1d95, #6d28d9);
+}
+
+.header-fuchsia {
+  background: linear-gradient(90deg, #701a75, #a21caf);
+}
+
+.header-indigo {
+  background: linear-gradient(90deg, #312e81, #4f46e5);
+}
+
+.header-dark {
+  background: #1f1733;
+  border-bottom: 1px solid var(--border-purple);
+}
+
+.section-header h2 {
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.pill {
+  background: rgba(9, 9, 11, 0.45);
+  color: #f3e8ff;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.section-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Interactive Array Simulator */
+.simulator-box {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-purple);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.sim-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.array-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.array-cell {
+  background: #0f0c18;
+  border: 1px solid #3b2d5e;
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  text-align: center;
+  min-width: 54px;
+  transition: all 0.2s ease;
+}
+
+.array-cell .idx {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.cell-visited {
+  background: rgba(147, 51, 234, 0.3);
+  border-color: #a855f7;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+}
+
+.cell-found {
+  background: rgba(16, 185, 129, 0.28);
+  border-color: var(--emerald-found);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+}
+
+.status-text {
+  font-size: 0.9rem;
+  color: #e9d5ff;
+  font-weight: 500;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 0.95rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #ffffff;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn-primary {
+  background: var(--purple-primary);
+}
+
+.btn-violet {
+  background: var(--violet-accent);
+}
+
+.btn-fuchsia {
+  background: var(--fuchsia-accent);
+}
+
+.btn-indigo {
+  background: var(--indigo-accent);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #581c87;
+  color: #e9d5ff;
+}
+
+.btn-small {
+  background: #2e2447;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.78rem;
+}
+
+/* Code Block */
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1d162e;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--border-purple);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  font-family: monospace;
+  font-size: 0.88rem;
+  color: #d8b4fe;
+}
+
+pre {
+  background: #07060b;
+  border: 1px solid var(--border-purple);
+  border-radius: 0 0 10px 10px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin-top: -1.25rem;
+}
+
+code {
+  font-family: "Fira Code", Consolas, monospace;
+  font-size: 0.86rem;
+  color: #f5d0fe;
+}
+
+/* Guide Question Box */
+.guide-box {
+  background: rgba(126, 34, 206, 0.14);
+  border-left: 4px solid #a855f7;
+  padding: 1rem 1.25rem;
+  border-radius: 0 10px 10px 0;
+}
+
+.guide-box h3 {
+  font-size: 0.98rem;
+  color: #e9d5ff;
+  margin-bottom: 0.35rem;
+}
+
+.guide-box p {
+  font-size: 0.92rem;
+  color: #d8b4fe;
+}
+
+/* Summary Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+th,
+td {
+  border: 1px solid var(--border-purple);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+th {
+  background: #1e1633;
+  color: #e9d5ff;
+}
+
+/* Clean White Print Styling for PDF Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    padding: 0;
+  }
+  .card,
+  .simulator-box,
+  pre,
+  .guide-box {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border-color: #d1d5db !important;
+    box-shadow: none !important;
+  }
+  .section-header {
+    background: #f3e8ff !important;
+    color: #4c1d95 !important;
+  }
+  .section-header h2,
+  h1,
+  code,
+  .guide-box h3,
+  .guide-box p,
+  .status-text {
+    color: #111827 !important;
+  }
+  .no-print,
+  .btn {
+    display: none !important;
+  }
+}
